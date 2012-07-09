@@ -16,7 +16,7 @@
 package scalatraext.thymeleaf
 
 import scala.collection.JavaConverters._
-import org.scalatra.ScalatraKernel
+import org.scalatra.servlet.ServletBase
 
 import org.thymeleaf.context.WebContext
 import org.thymeleaf.templateresolver._
@@ -27,10 +27,14 @@ import org.thymeleaf.TemplateEngine
  */
 trait ThymeleafSupport {
 
-  this: ScalatraKernel =>
+  this: ServletBase =>
 
+  /*
   // isDevelopmentMode : `org.scalatra.Environment` is looked up as a system property
   lazy val thymeleafCacheable: Boolean = !isDevelopmentMode
+  */
+  // TODO above doesn't work with 2.1.0-SNAPSHOT (2012/07/09)
+  lazy val thymeleafCacheable: Boolean = false
 
   lazy val thymeleafautoContentType: Boolean = true
 
@@ -65,7 +69,7 @@ trait ThymeleafSupport {
     if (thymeleafautoContentType) {
       contentType = "text/html; charset=" + thymeleafCharacterEncoding
     }
-    val context = new WebContext(request, servletContext)
+    val context = new WebContext(request, applicationContext)
     attributes.foreach {
       case (key, value: Map[_, _]) => context.setVariable(key, value.asJava)
       case (key, value: Iterable[_]) => context.setVariable(key, value.asJava)

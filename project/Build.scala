@@ -10,9 +10,11 @@ object ScalatraExtBuild extends Build {
       sbtPlugin := false,
       organization := "com.github.seratch",
       name := "scalatra-thymeleaf-support",
-      version := "2.0.0",
+      version := "2.1.0-SNAPSHOT",
       scalaVersion := "2.9.2",
       crossScalaVersions := Seq("2.9.2", "2.9.1"),
+      resolvers += "sonatype releases" at "http://oss.sonatype.org/content/repositories/releases",
+      resolvers += "sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
         _scalatraDependencies ++ Seq(
           "org.thymeleaf"            %  "thymeleaf" % "2.0.8",
@@ -42,6 +44,8 @@ object ScalatraExtBuild extends Build {
       name := "demo",
       version := "0.1.0-SNAPSHOT",
       scalaVersion := "2.9.2",
+      resolvers += "sonatype releases" at "http://oss.sonatype.org/content/repositories/releases",
+      resolvers += "sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
         _scalatraDependencies ++ _containerDepenedencies ++ Seq(
           "org.thymeleaf"            %  "thymeleaf" % "2.0.8",
@@ -58,8 +62,8 @@ object ScalatraExtBuild extends Build {
     </dependencies>
   )
 
-  lazy val _scalatraVersion = "2.0.4"
-  lazy val _servletApi = "javax.servlet" % "servlet-api" % "2.5"
+  lazy val _scalatraVersion = "[2.1,)"
+  lazy val _servletApi = "javax.servlet" % "javax.servlet-api" % "3.0.1"
 
   lazy val _scalatraDependencies = Seq(
     "org.scalatra"      %  "scalatra_2.9.1" % _scalatraVersion,
