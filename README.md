@@ -25,7 +25,7 @@ Added library dependency to sbt settings.
 And then mix ThymeleafSupport to ScalatraServlet/ScalatraFilter.
 
 ```scala
-import scalatraext.ThymeleafSupport
+import scalatraext.thymeleaf.ThymeleafSupport
 
 class MyServlet extends ScalatraServlet with ThymeleafSupport {
 
