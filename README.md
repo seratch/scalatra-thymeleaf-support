@@ -19,7 +19,7 @@ http://thymeleaf.org
 Added library dependency to sbt settings.
 
 ```scala
-"com.github.seratch" %% "scalatra-thymeleaf-support" % "1.0.0"
+"com.github.seratch" %% "scalatra-thymeleaf-support" % "2.0.0"
 ```
 
 And then mix ThymeleafSupport to ScalatraServlet/ScalatraFilter.
