@@ -10,7 +10,7 @@ object ScalatraExtBuild extends Build {
       sbtPlugin := false,
       organization := "com.github.seratch",
       name := "scalatra-thymeleaf-support",
-      version := "1.0.0",
+      version := "2.0.0",
       scalaVersion := "2.9.2",
       crossScalaVersions := Seq("2.9.2", "2.9.1"),
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
@@ -59,16 +59,17 @@ object ScalatraExtBuild extends Build {
   )
 
   lazy val _scalatraVersion = "2.0.4"
+  lazy val _servletApi = "javax.servlet" % "servlet-api" % "2.5"
 
   lazy val _scalatraDependencies = Seq(
     "org.scalatra"      %  "scalatra_2.9.1" % _scalatraVersion,
     "org.scalatra"      %  "scalatra-scalatest_2.9.1" % _scalatraVersion % "test",
     "ch.qos.logback"    %  "logback-classic" % "1.0.2" % "runtime",
-    "javax.servlet"     %  "servlet-api" % "2.5" % "provided"
+    _servletApi % "provided"
   )
 
   lazy val _containerDepenedencies = Seq(
-    "javax.servlet"     %  "servlet-api" % "2.5" % "container",
+    _servletApi % "container",
     "org.eclipse.jetty" % "jetty-webapp" % "7.6.4.v20120524" % "container" 
       exclude("org.eclipse.jetty.orbit", "javax.servlet")
   )
