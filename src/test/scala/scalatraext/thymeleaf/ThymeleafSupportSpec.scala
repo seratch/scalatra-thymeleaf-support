@@ -15,13 +15,20 @@
  */
 package scalatraext.thymeleaf
 
+import scala.collection.JavaConverters._
+
 import org.scalatest._
 import org.scalatest.matchers._
 
 import org.scalatra.ScalatraServlet
 import org.scalatra.test.scalatest.ScalatraFlatSpec
 
+import org.thymeleaf.dialect.IDialect
+
 class MyServlet extends ScalatraServlet with ThymeleafSupport {
+  override lazy val thymeleafDialects: Set[_ <: IDialect] = {
+    Set(new nz.net.ultraq.web.thymeleaf.LayoutDialect)
+  }
   get("/") { render("index", "value" -> "OK!") }
 }
 
@@ -54,6 +61,11 @@ class ThymeleafSupportSpec extends ScalatraFlatSpec with ShouldMatchers {
     servlet.thymeleafResolverCacheTTLMs should equal(3600000L)
     servlet.thymeleafResolver should not be (null)
     servlet.thymeleafTemplateEngine should not be (null)
+
+    servlet.thymeleafTemplateEngine.getDialects.size should equal(2)
+    val dialects = servlet.thymeleafTemplateEngine.getDialects.asScala.toSeq
+    dialects(0).isInstanceOf[org.thymeleaf.standard.StandardDialect] should be(true)
+    dialects(1).isInstanceOf[nz.net.ultraq.web.thymeleaf.LayoutDialect] should be(true)
   }
 
 }
