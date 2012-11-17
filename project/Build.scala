@@ -18,7 +18,7 @@ object ScalatraExtBuild extends Build {
           "org.thymeleaf"               %  "thymeleaf" % "2.0.8",
           "net.sourceforge.nekohtml"    %  "nekohtml"  % "1.9.15",
           "nz.net.ultraq.web.thymeleaf" % "thymeleaf-layout-dialect" % "1.0.4" % "test",
-          "org.scalatest"               %% "scalatest" % "1.7.2" % "test"
+          "org.scalatest"               %% "scalatest" % "[1.7,)" % "test"
         )
       },
       publishTo <<= version { (v: String) =>
