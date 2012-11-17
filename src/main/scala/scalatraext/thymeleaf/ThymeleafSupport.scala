@@ -21,6 +21,7 @@ import org.scalatra.ScalatraKernel
 import org.thymeleaf.context.WebContext
 import org.thymeleaf.templateresolver._
 import org.thymeleaf.TemplateEngine
+import org.thymeleaf.dialect.IDialect
 
 /**
  * Thymeleaf support
@@ -33,6 +34,8 @@ trait ThymeleafSupport {
   lazy val thymeleafCacheable: Boolean = !isDevelopmentMode
 
   lazy val thymeleafautoContentType: Boolean = true
+  
+  val thymeleafDialects: Set[ _ <: IDialect] = Set()
 
   lazy val thymeleafResolverTemplateMode: String = "LEGACYHTML5"
 
@@ -58,6 +61,7 @@ trait ThymeleafSupport {
   lazy val thymeleafTemplateEngine: TemplateEngine = {
     val engine = new TemplateEngine
     engine.setTemplateResolver(thymeleafResolver)
+    thymeleafDialects.foreach( engine.addDialect )
     engine
   }
 
