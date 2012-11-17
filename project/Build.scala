@@ -10,14 +10,15 @@ object ScalatraExtBuild extends Build {
       sbtPlugin := false,
       organization := "com.github.seratch",
       name := "scalatra-thymeleaf-support",
-      version := "2.0.0",
+      version := "2.0.1",
       scalaVersion := "2.9.2",
       crossScalaVersions := Seq("2.9.2", "2.9.1"),
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
         _scalatraDependencies ++ Seq(
-          "org.thymeleaf"            %  "thymeleaf" % "2.0.8",
-          "net.sourceforge.nekohtml" %  "nekohtml"  % "1.9.15",
-          "org.scalatest"            %% "scalatest" % "1.7.2" % "test"
+          "org.thymeleaf"               %  "thymeleaf" % "2.0.8",
+          "net.sourceforge.nekohtml"    %  "nekohtml"  % "1.9.15",
+          "nz.net.ultraq.web.thymeleaf" % "thymeleaf-layout-dialect" % "1.0.4" % "test",
+          "org.scalatest"               %% "scalatest" % "1.7.2" % "test"
         )
       },
       publishTo <<= version { (v: String) =>
