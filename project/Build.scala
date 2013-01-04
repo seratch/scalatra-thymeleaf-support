@@ -45,8 +45,8 @@ object ScalatraExtBuild extends Build {
       scalaVersion := "2.9.2",
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
         _scalatraDependencies ++ _containerDepenedencies ++ Seq(
-          "org.thymeleaf"            %  "thymeleaf" % "2.0.8",
-          "net.sourceforge.nekohtml" %  "nekohtml"  % "1.9.15"
+          "org.thymeleaf"            %  "thymeleaf" % "2.0.15",
+          "net.sourceforge.nekohtml" %  "nekohtml"  % "1.9.17"
         )
       },
       scalacOptions ++= Seq("-deprecation", "-unchecked")
