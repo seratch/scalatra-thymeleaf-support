@@ -69,7 +69,7 @@ trait ThymeleafSupport {
     if (thymeleafautoContentType) {
       contentType = "text/html; charset=" + thymeleafCharacterEncoding
     }
-    val context = new WebContext(request, servletContext)
+    val context = new WebContext(request, response, servletContext)
     attributes.foreach {
       case (key, value: Map[_, _]) => context.setVariable(key, value.asJava)
       case (key, value: Iterable[_]) => context.setVariable(key, value.asJava)
