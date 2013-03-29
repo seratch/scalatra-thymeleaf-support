@@ -10,16 +10,20 @@ object ScalatraExtBuild extends Build {
       sbtPlugin := false,
       organization := "com.github.seratch",
       name := "scalatra-thymeleaf-support",
-      version := "2.1.0-SNAPSHOT",
-      scalaVersion := "2.9.2",
-      crossScalaVersions := Seq("2.9.2", "2.9.1"),
+      version := "2.2.0",
+      scalaVersion := "2.10.0",
       resolvers += "sonatype releases" at "http://oss.sonatype.org/content/repositories/releases",
       resolvers += "sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
+        val scalatest = "scalatest_" + (scalaVersion match {
+          case "2.10.1" | "2.10.0" => "2.10.0"
+          case "2.9.3" => "2.9.2"
+          case version => version
+        })
         _scalatraDependencies ++ Seq(
-          "org.thymeleaf"            %  "thymeleaf" % "2.0.8",
-          "net.sourceforge.nekohtml" %  "nekohtml"  % "1.9.15",
-          "org.scalatest"            %% "scalatest" % "1.7.2" % "test"
+          "org.thymeleaf"            %  "thymeleaf" % "2.0.16",
+          "net.sourceforge.nekohtml" %  "nekohtml"  % "1.9.18",
+          "org.scalatest"            %  scalatest   % "1.8"   % "test"
         )
       },
       publishTo <<= version { (v: String) =>
@@ -43,7 +47,7 @@ object ScalatraExtBuild extends Build {
       organization := "demo",
       name := "demo",
       version := "0.1.0-SNAPSHOT",
-      scalaVersion := "2.9.2",
+      scalaVersion := "2.10.0",
       resolvers += "sonatype releases" at "http://oss.sonatype.org/content/repositories/releases",
       resolvers += "sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies <++= (scalaVersion) { scalaVersion =>
@@ -62,13 +66,13 @@ object ScalatraExtBuild extends Build {
     </dependencies>
   )
 
-  lazy val _scalatraVersion = "[2.1,)"
+  lazy val _scalatraVersion = "2.2.0"
   lazy val _servletApi = "javax.servlet" % "javax.servlet-api" % "3.0.1"
 
   lazy val _scalatraDependencies = Seq(
-    "org.scalatra"      %  "scalatra_2.9.1" % _scalatraVersion,
-    "org.scalatra"      %  "scalatra-scalatest_2.9.1" % _scalatraVersion % "test",
-    "ch.qos.logback"    %  "logback-classic" % "1.0.2" % "runtime",
+    "org.scalatra"      %  "scalatra_2.10" % _scalatraVersion,
+    "org.scalatra"      %  "scalatra-scalatest_2.10" % _scalatraVersion % "test",
+    "ch.qos.logback"    %  "logback-classic" % "1.0.11" % "runtime",
     _servletApi % "provided"
   )
 

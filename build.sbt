@@ -1,14 +1,8 @@
-import testgenerator.SbtKeys._
+scalariformSettings
 
-seq(scalariformSettings: _*)
+testgeneratorSettings
 
-seq(testgeneratorSettings: _*)
+webSettings
 
-testgeneratorEncoding in Compile := "UTF-8"
-
-testgeneratorTestTemplate in Compile := "scalatest.FlatSpec"
-
-testgeneratorScalaTestMatchers in Compile := "ShouldMatchers"
-
-testgeneratorLineBreak in Compile := "LF"
+libraryDependencies += "org.mortbay.jetty" % "jetty" % "6.1.22" % "container"
 
